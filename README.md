@@ -1,4 +1,4 @@
 ## Billbox authentication server
 
 ## License
-GPLv2 [Licensed](LICENSE).
+AGPL-3.0 [Licensed](LICENSE).
