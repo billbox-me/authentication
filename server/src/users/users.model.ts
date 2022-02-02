@@ -1,7 +1,7 @@
 import { UUIDV4 } from 'sequelize';
 import { Optional } from 'sequelize';
 import { BelongsTo, Column, Model, Table } from 'sequelize-typescript';
-import { UserGroupsModel } from "./groups/groups.model";
+import { UserGroupsModel } from './groups/groups.model';
 
 interface User {
   readonly id: string;
@@ -14,11 +14,19 @@ interface User {
   readonly primary: boolean;
   readonly user_group_id: string;
 }
-interface UserOptional extends Optional<User, 'id' | 'firstname' | 'lastname' | 'tel' | 'activated' | 'primary' | 'user_group_id'> {}
+type UserOptional = Optional<
+  User,
+  | 'id'
+  | 'firstname'
+  | 'lastname'
+  | 'tel'
+  | 'activated'
+  | 'primary'
+  | 'user_group_id'
+>;
 
 @Table({ tableName: 'users', createdAt: 'created_at', updatedAt: 'updated_at' })
 export class UsersModel extends Model<User, UserOptional> {
-
   @Column({ primaryKey: true, defaultValue: UUIDV4 })
   readonly id: string;
 
@@ -37,16 +45,15 @@ export class UsersModel extends Model<User, UserOptional> {
   @Column
   readonly tel: string;
 
-  @Column({allowNull: false, defaultValue: true})
+  @Column({ allowNull: false, defaultValue: true })
   readonly activated: boolean;
 
-  @Column({allowNull: false, defaultValue: false})
+  @Column({ allowNull: false, defaultValue: false })
   readonly primary: boolean;
 
-  @Column({allowNull: false})
+  @Column({ allowNull: false })
   readonly user_group_id: string;
 
   @BelongsTo(() => UserGroupsModel, 'user_group_id')
   readonly group?: UserGroupsModel;
-
 }

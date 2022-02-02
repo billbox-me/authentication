@@ -8,13 +8,9 @@ import { InstallerService } from './installer.service';
 
 @Module({
   imports: [
-    SequelizeModule.forFeature([
-      UsersModel,
-      UserGroupsModel,
-      OptionsModel
-    ])
+    SequelizeModule.forFeature([UsersModel, UserGroupsModel, OptionsModel]),
   ],
   controllers: [InstallerController],
-  providers: [InstallerService]
+  providers: [InstallerService],
 })
 export class InstallerModule {}

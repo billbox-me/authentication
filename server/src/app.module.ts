@@ -4,14 +4,14 @@ import { Dialect } from 'sequelize/types';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { InstallerModule } from './installer/installer.module';
-import { production, development} from 'database/config/database.json';
+import { production, development } from 'database/config/database.json';
 
 @Module({
   imports: [
     SequelizeModule.forRoot({
-      dialect: <Dialect>'mysql'
+      dialect: <Dialect>'mysql',
     }),
-    InstallerModule
+    InstallerModule,
   ],
   controllers: [AppController],
   providers: [AppService],

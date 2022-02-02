@@ -3,16 +3,19 @@ import { Optional } from 'sequelize';
 import { UUIDV4 } from 'sequelize';
 
 interface Option {
-  readonly id: string,
-  readonly name: string,
-  readonly value: string,
+  readonly id: string;
+  readonly name: string;
+  readonly value: string;
 }
 
-interface OptionOptional extends Optional<Option, 'id'> { }
+type OptionOptional = Optional<Option, 'id'>;
 
-@Table({ tableName: 'options', createdAt: 'created_at', updatedAt: 'updated_at' })
+@Table({
+  tableName: 'options',
+  createdAt: 'created_at',
+  updatedAt: 'updated_at',
+})
 export class OptionsModel extends Model<Option, OptionOptional> {
-
   @Column({ primaryKey: true, defaultValue: UUIDV4 })
   readonly id: string;
 
@@ -21,5 +24,4 @@ export class OptionsModel extends Model<Option, OptionOptional> {
 
   @Column({ allowNull: false })
   readonly value: string;
-
 }
