@@ -50,7 +50,7 @@ module.exports = {
       user_group_id: {
         allowNull: false,
         type: Sequelize.UUID,
-      }
+      },
     });
   },
   down: async (queryInterface) => {
