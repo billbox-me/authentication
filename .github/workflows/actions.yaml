@@ -15,7 +15,7 @@ jobs:
         working-directory: 'server'
       - run: yarn run build
         working-directory: 'server'
-  
+
   build-ui:
     runs-on: ubuntu-latest
     steps:
