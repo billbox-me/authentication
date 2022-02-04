@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { OptionsModel } from 'src/models/options.model';
+import { UsersModel } from 'src/models/users.model';
 import { LoginController } from './login.controller';
 import { LoginService } from './login.service';
 
@@ -8,7 +9,8 @@ import { LoginService } from './login.service';
   controllers: [LoginController],
   imports: [
     SequelizeModule.forFeature([
-      OptionsModel
+      OptionsModel,
+      UsersModel
     ])
   ],
   providers: [LoginService],

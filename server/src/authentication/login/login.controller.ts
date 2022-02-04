@@ -47,12 +47,21 @@ export class LoginController {
     }
 
     try {
-      const token: string = await this.loginService.authenticate(tel, password);
-    } catch (error) {
-      response.status(400)
-    }
+      const authenticate: {status: number, message: string} = await this.loginService.authenticate(tel, password);
 
-    response.status(200).send();
+      if (authenticate.status === 200) {
+        response.status(200).send(authenticate.message);
+        return;
+      }
+
+      response.status(authenticate.status).send(authenticate.message);
+      return;
+
+    } catch (error) {
+      console.trace(error);
+      response.status(403).send();
+      return;
+    }
 
   }
 }
