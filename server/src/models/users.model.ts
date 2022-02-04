@@ -1,7 +1,7 @@
 import { UUIDV4 } from 'sequelize';
 import { Optional } from 'sequelize';
 import { BelongsTo, Column, Model, Table } from 'sequelize-typescript';
-import { UserGroupsModel } from './groups/groups.model';
+import { UserGroupsModel } from './user_groups.model';
 
 interface User {
   readonly id: string;
