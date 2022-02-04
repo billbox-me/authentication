@@ -15,7 +15,12 @@ jobs:
         working-directory: 'server'
       - run: yarn run build
         working-directory: 'server'
-
+  docker-io-build:
+    runs-on: 'ubuntu-latest'
+    steps:
+      - uses: 'actions/checkout@v2'
+      - name: 'Build to docker.io'
+        run: docker build . -t docker.io/library/billbox-me/authentication:latest
   build-ui:
     runs-on: ubuntu-latest
     steps:
