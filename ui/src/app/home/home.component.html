@@ -19,11 +19,11 @@
           <!-- <nz-form-label [nzSpan]="24" nzRequired>Phone Number</nz-form-label> -->
 
 
-          <nz-form-control [nzValidateStatus]="validateForm.controls['phoneNumber']"
+          <nz-form-control
             nzErrorTip="Please input your phone number!">
-            <nz-input-group nzPrefixIcon="lock">
+            <nz-input-group nzPrefixIcon="phone">
 
-              <input formControlName="phoneNumber" placeholder="Phone Number" nz-input class="_input" nzSize="large" />
+              <input formControlName="phone" placeholder="Phone Number" nz-input class="_input" nzSize="large" />
             </nz-input-group>
           </nz-form-control>
         </nz-form-item>
@@ -46,9 +46,10 @@
             <a class="login-form-forgot">Forgot password</a>
           </div>
         </div>
-        <button nz-button class="login-form-button login-form-margin" [nzType]="'primary'" (click)="submitForm()"
+        <button nz-button class="login-form-button login-form-margin" [nzType]="'primary'"
           type="submit" nzSize="large">Create Account</button>
         <div style="margin-top: 5px;">Aready have an account? <span style="color:#ff6711;font-weight: 500;">Log in</span></div>
+        <span id="recaptcha-container"></span>
       </form>
      
     </div>

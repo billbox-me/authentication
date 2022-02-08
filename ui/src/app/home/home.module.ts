@@ -8,6 +8,7 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzCheckboxModule } from 'ng-zorro-antd/checkbox'
 import { ReactiveFormsModule } from '@angular/forms';
+import { NzMessageModule } from 'ng-zorro-antd/message';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     NzButtonModule,
     NzInputModule,
     NzCheckboxModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NzMessageModule
   ]
 })
 export class HomeModule { }
