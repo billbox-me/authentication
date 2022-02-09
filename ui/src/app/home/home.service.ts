@@ -7,9 +7,7 @@ import {
   RecaptchaVerifier,
   signInWithPhoneNumber,
 } from 'firebase/auth';
-import * as test from 'src/config.json';
-
-console.log(test);
+import CONFIG from 'src/config.json';
 
 @Injectable({
   providedIn: 'root',
@@ -22,7 +20,7 @@ export class HomeService {
   constructor() {}
 
   public async RecaptchaVerifierRender(): Promise<void> {
-    initializeApp();
+    initializeApp(CONFIG.FIREBASE);
 
     this.firebaseAuth = getAuth();
     this.firebaseAuth.useDeviceLanguage();
