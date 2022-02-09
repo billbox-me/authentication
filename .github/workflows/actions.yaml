@@ -3,6 +3,7 @@ name: actions
 on: [push, pull_request]
 jobs:
   ui-config:
+    runs-on: ubuntu-latest
     name: ui-config
     steps:
       - name: 'pull repo'
