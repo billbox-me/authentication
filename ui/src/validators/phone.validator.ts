@@ -1,6 +1,6 @@
 import { FormControl, ValidationErrors, ValidatorFn } from '@angular/forms';
 import { PhoneNumberUtil, PhoneNumber } from 'google-libphonenumber';
-import { observable, Observable, Observer } from 'rxjs';
+import { Observable, Observer } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
 export function PhoneValidator(httpCLient: HttpClient) {

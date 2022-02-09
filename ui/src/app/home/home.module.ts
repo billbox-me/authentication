@@ -9,6 +9,7 @@ import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NzMessageModule } from 'ng-zorro-antd/message';
+import { HomeService } from './home.service';
 
 @NgModule({
   declarations: [HomeComponent],
@@ -23,5 +24,6 @@ import { NzMessageModule } from 'ng-zorro-antd/message';
     ReactiveFormsModule,
     NzMessageModule,
   ],
+  providers: [HomeService]
 })
 export class HomeModule {}

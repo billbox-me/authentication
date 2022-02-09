@@ -23,6 +23,11 @@ export class HomeComponent implements OnInit {
   ) {}
 
   async submitForm(): Promise<void> {
+
+    if (this.loading) {
+      return;
+    }
+
     if (this.validateForm.valid) {
       this.loading = true;
 
@@ -45,7 +50,6 @@ export class HomeComponent implements OnInit {
     this.validateForm = this.fb.group({
       phone: [null, [Validators.required], [PhoneValidator(this.httpClient)]],
       password: [null, [Validators.required]],
-      remember: [true],
     });
   }
 }
