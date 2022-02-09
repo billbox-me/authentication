@@ -23,7 +23,6 @@ export class HomeComponent implements OnInit {
   ) {}
 
   async submitForm(): Promise<void> {
-
     if (this.loading) {
       return;
     }

@@ -28,7 +28,7 @@ export class HomeService {
       'recaptcha-container',
       {
         size: 'invisible',
-        callback: (response: any) => {
+        callback: (response: string) => {
           console.log(response);
         },
       },

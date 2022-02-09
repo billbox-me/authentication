@@ -7,12 +7,7 @@ import { LoginService } from './login.service';
 
 @Module({
   controllers: [LoginController],
-  imports: [
-    SequelizeModule.forFeature([
-      OptionsModel,
-      UsersModel
-    ])
-  ],
+  imports: [SequelizeModule.forFeature([OptionsModel, UsersModel])],
   providers: [LoginService],
 })
 export class LoginModule {}
