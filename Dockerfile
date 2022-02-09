@@ -6,6 +6,7 @@ COPY . .
 
 RUN cd server && \
     yarn install && \
+    yarn cache clean && \
     yarn run build
 
 EXPOSE 3000

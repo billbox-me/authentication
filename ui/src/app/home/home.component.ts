@@ -32,9 +32,10 @@ export class HomeComponent implements OnInit {
 
       try {
         await this.homeService.submit(this.validateForm.value.phone);
-      } catch (error: any) {
+      } catch (error) {
+        console.log(error)
         this.loading = false;
-        this.nzMessage.error(error);
+        this.nzMessage.error('Incorrect credential!');
       }
 
       return;

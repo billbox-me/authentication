@@ -47,6 +47,7 @@ export class LoginService {
   }
 
   private async firebaseAuthenticate(tel: string): Promise<boolean> {
+    console.log(tel);
     return true;
   }
 }
