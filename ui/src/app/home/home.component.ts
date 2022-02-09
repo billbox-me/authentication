@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HomeService } from './home.service';
 import { NzMessageService } from 'ng-zorro-antd/message';
+import { PhoneValidator } from 'src/validators/phone.validator';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-login',
@@ -10,28 +12,38 @@ import { NzMessageService } from 'ng-zorro-antd/message';
 })
 export class HomeComponent implements OnInit {
   validateForm!: FormGroup;
-  validateUsername = 'Please input your username!';
-  validatePassword = 'Please input your password!';
+  validateUsername: string = 'Please input your username!';
+  validatePassword: string = 'Please input your password!';
+  loading: boolean = false;
   constructor(
     private fb: FormBuilder,
     private homeService: HomeService,
-    private nzMessage: NzMessageService
+    private nzMessage: NzMessageService,
+    private httpClient: HttpClient
   ) {}
 
   async submitForm(): Promise<void> {
     if (this.validateForm.valid) {
-      this.homeService.submit();
+      this.loading = true;
+
+      try {
+        await this.homeService.submit(this.validateForm.value.phone);
+      } catch (error: any) {
+        this.loading = false;
+        this.nzMessage.error(error);
+      }
+
       return;
     }
 
     this.nzMessage.error('Please input your phone and password!');
   }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
     this.homeService.RecaptchaVerifierRender();
 
     this.validateForm = this.fb.group({
-      phone: [null, [Validators.required]],
+      phone: [null, [Validators.required], [PhoneValidator(this.httpClient)]],
       password: [null, [Validators.required]],
       remember: [true],
     });

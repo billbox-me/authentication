@@ -1,21 +1,28 @@
 import { Injectable } from '@angular/core';
 import { initializeApp } from 'firebase/app';
-import { getAuth, RecaptchaVerifier } from 'firebase/auth';
-import { NzMessageService } from 'ng-zorro-antd/message';
+import {
+  Auth,
+  ConfirmationResult,
+  getAuth,
+  RecaptchaVerifier,
+  signInWithPhoneNumber,
+} from 'firebase/auth';
+import * as test from 'src/config.json';
+
+console.log(test);
 
 @Injectable({
   providedIn: 'root',
 })
 export class HomeService {
-  private recaptchaVerifier: any;
-  private firebaseAuth: any;
+  private recaptchaVerifier!: RecaptchaVerifier;
+  private firebaseAuth!: Auth;
+  private confirmationResult!: ConfirmationResult;
 
   constructor() {}
 
   public async RecaptchaVerifierRender(): Promise<void> {
-    const firebaseConfig = null
-
-    initializeApp(firebaseConfig);
+    initializeApp();
 
     this.firebaseAuth = getAuth();
     this.firebaseAuth.useDeviceLanguage();
@@ -25,18 +32,24 @@ export class HomeService {
         size: 'invisible',
         callback: (response: any) => {
           console.log(response);
-          console.log('test');
         },
       },
       this.firebaseAuth
     );
-
   }
 
-  public async submit(): Promise<void> {
+  public async submit(phone: string): Promise<void> {
     await this.recaptchaVerifier.render();
 
-    
-
+    try {
+      this.confirmationResult = await signInWithPhoneNumber(
+        this.firebaseAuth,
+        phone,
+        this.recaptchaVerifier
+      );
+    } catch (error) {
+      console.log(error);
+      throw new Error('invalid phone number');
+    }
   }
 }
