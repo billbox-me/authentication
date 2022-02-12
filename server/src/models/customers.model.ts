@@ -8,7 +8,7 @@ interface Customer {
   readonly password: string;
   readonly active: boolean;
 }
-type CustomerOptional = Optional<Customer, | 'id' | 'active'>;
+type CustomerOptional = Optional<Customer, 'id' | 'active'>;
 
 @Table({
   tableName: 'customers',
