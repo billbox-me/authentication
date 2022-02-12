@@ -5,7 +5,6 @@ import { RegisterService } from './register.service';
 
 @Controller('authentication/register')
 export class RegisterController {
-
   constructor(private registerService: RegisterService) {}
 
   @Post()
@@ -41,21 +40,19 @@ export class RegisterController {
     }
 
     try {
-      if(await this.registerService.findByTel(tel) !== null) {
+      if ((await this.registerService.findByTel(tel)) !== null) {
         response.status(200).send();
         return;
-      };
+      }
 
       const token: string = await this.registerService.register(tel, password);
 
       response.status(200).send(token);
       return;
-    } catch(error) {
-      console.trace(error)
+    } catch (error) {
+      console.trace(error);
       response.status(500).send();
       return;
     }
-    
   }
-
 }

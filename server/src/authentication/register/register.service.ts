@@ -36,8 +36,9 @@ export class RegisterService {
   }
 
   async register(tel: string, password: string): Promise<string> {
-
-    let hashed: string; let token: string; let session_id: string;
+    let hashed: string;
+    let token: string;
+    let session_id: string;
 
     try {
       /**
@@ -55,21 +56,28 @@ export class RegisterService {
     } catch (error) {
       throw new Error(error);
     }
-    
+
     try {
       /**
        * Transaction
        * see: https://docs.nestjs.com/techniques/database#transactions-1
        */
       await this.sequelize.transaction(async (transaction) => {
-        const customersModel: CustomersModel = await this.customersModel.create({
-          tel,
-          password: hashed,
-        }, { transaction });
+        const customersModel: CustomersModel = await this.customersModel.create(
+          {
+            tel,
+            password: hashed,
+          },
+          { transaction },
+        );
 
-        const customerSessionsModel: CustomerSessionsModel = await this.customerSessionsModel.create({
-          customer_id: customersModel.id,
-        }, { transaction });
+        const customerSessionsModel: CustomerSessionsModel =
+          await this.customerSessionsModel.create(
+            {
+              customer_id: customersModel.id,
+            },
+            { transaction },
+          );
 
         session_id = customerSessionsModel.id;
       });
@@ -82,26 +90,28 @@ export class RegisterService {
        * Import OpenSSL private key from database
        * encode payload with private key to json web token (JWT)
        * see: https://github.com/auth0/node-jsonwebtoken for json web token (JWT)
-      */
+       */
       const optionsModel: OptionsModel = await this.optionsModel.findOne({
         where: {
           name: 'privateKey',
-        }
-      })
+        },
+      });
 
       if (optionsModel === null) {
         throw new Error(null);
       }
 
-      token = sign({
-        tel,
-        token: session_id
-      }, optionsModel.value,
-      {
-        algorithm: 'RS256'
-      });
-
-    } catch(error){
+      token = sign(
+        {
+          tel,
+          token: session_id,
+        },
+        optionsModel.value,
+        {
+          algorithm: 'RS256',
+        },
+      );
+    } catch (error) {
       throw new Error(error);
     }
 

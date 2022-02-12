@@ -9,6 +9,12 @@ import { RegisterService } from './register.service';
 @Module({
   controllers: [RegisterController],
   providers: [RegisterService],
-  imports: [SequelizeModule.forFeature([CustomersModel, CustomerSessionsModel, OptionsModel])]
+  imports: [
+    SequelizeModule.forFeature([
+      CustomersModel,
+      CustomerSessionsModel,
+      OptionsModel,
+    ]),
+  ],
 })
 export class RegisterModule {}
