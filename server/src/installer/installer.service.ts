@@ -55,10 +55,9 @@ export class InstallerService {
        * see: https://nodejs.org/api/crypto.html#crypto for sha256 hash
        * see: https://www.npmjs.com/package/bcrypt for bcrypt hash
        */
-      const passwordsha256: string = createHmac(
-        'sha256',
-        password,
-      ).digest('hex'); // hash password to sha256
+      const passwordsha256: string = createHmac('sha256', password).digest(
+        'hex',
+      ); // hash password to sha256
       const salt: string = genSaltSync(Math.floor(Math.random() * 5) + 5); // generate bcrypt salt
 
       hashed = hashSync(passwordsha256, salt); // hash password with salt
