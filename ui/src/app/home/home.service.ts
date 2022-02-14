@@ -94,7 +94,7 @@ export class HomeService {
       if (response === null) {
         return;
       }
-    } catch (error: { status: number } | any) {
+    } catch (error: ?{ status: number } | unknown) {
       if (error.status !== 403) {
         throw new Error('failed to register');
       }
